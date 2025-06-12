@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %} {% endblock title %}| Lark
+    </title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: linear-gradient(90deg, #252525, #333333);
+        border-radius: 10px;
+        position: fixed; /* Fix the navbar at the top */
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+        transition: transform 0.3s ease;
+        z-index: 1000; /* Ensure it stays above other content */
+      }
+      
+      .navbar:hover {
+        transform: translateY(-5px);
+      }
+        .logo {
+        font-family: 'Unnbounded', sans-serif;
+        font-size: 2.0rem;
+        font-weight: 700;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+
+        /* Gradient text with animation */
+        background: linear-gradient(270deg, #00C9FF,rgb(236, 39, 254), #00C9FF);
+        background-size: 600% 600%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: gradientShift 10s ease infinite;
+
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .logo::before {
+            content: '';
+            margin-right: 5px;
+            color: #ffffff;
+            animation: glow 2s infinite alternate;
+        }
+      
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 5px #007bff;
+        }
+        100% {
+          text-shadow: 0 0 20px #007bff, 0 0 30px #007bff;
+        }
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+      
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: #007bff;
+        bottom: -5px;
+        left: 0;
+        transition: width 0.3s ease;
+      }
+      
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      
+      .nav-links a:hover {
+        color: #007bff;
+      }
+      
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .nav-buttons a {
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .search {
+        background-color: #333333;
+        color: #ffffff;
+      }
+      
+      .getintouch {
+        background-color: #007bff;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .getintouch::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shine 3s infinite;
+      }
+      
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      
+      .nav-buttons a:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+      }
+      footer {
+            background: linear-gradient(90deg, #252525, #333333);
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+            position: relative;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+        @media (max-width: 767px) {
+            .nav-links {
+                display:none;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+      {% block custom_style %}{% endblock custom_style %}
+    </style>
+    
+  </head>
+  <body>
+    {% block navbar %}
+    <nav class="navbar">
+        <a style="text-decoration: none;" href="{% url "home" %}"><div class="logo">LARK</div></a>
+        <div class="nav-links">
+            <a href="{% url "all_blogs" %}">All Blogs</a>
+            <a href="#">My Portfolio</a>
+            <a href="#">About Me</a>
+        </div>
+        <div class="nav-buttons">
+            <a href="#" class="search">Search</a>
+            <a href="#" class="getintouch">Get in Touch</a>
+        </div>
+    </nav>
+    {% endblock navbar %}
+    {% block body %}{% endblock body %}
+    <footer>
+        <div class="footer-links">
+            <a href="#">About Me</a>
+            <a href="{% url "all_blogs" %}">All Blogs</a>
+            <a href="#">Contact Me</a>
+            <a href="#">My Portfolio</a>
+        </div>
+        <div class="footer-text">© 2025 Lark. All rights reserved.</div>
+    </footer>
+  </body>
+</html>
