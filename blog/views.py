@@ -4,4 +4,4 @@ from .models import*
 # Create your views here.
 def home_view(request):
     blogs = blog_data.objects.all()[:3]
-    return render(request,'home.html',{'blogs':blogs})
+    return render(request,'staticpages/home.html',{'blogs':blogs})
