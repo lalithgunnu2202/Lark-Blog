@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Journal Tracker</title>
-    <style>
+{% extends "personal/base.html" %}
+
+{% block title %}All Journals{% endblock title %}
+{% block custom_style %}
         * {
             margin: 0;
             padding: 0;
@@ -197,7 +194,7 @@
             text-transform: uppercase;
         }
 
-        .add-journal-btn {
+        .add-journal-butn {
             padding: 10px 20px;
             background-color: #007bff;
             border-radius: 20px;
@@ -210,12 +207,12 @@
             overflow: hidden;
         }
 
-        .add-journal-btn:hover {
+        .add-journal-butn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
         }
 
-        .add-journal-btn::before {
+        .add-journal-butn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -234,6 +231,7 @@
         }
 
         .journal-entry {
+            text-decoration: none;
             display: flex;
             align-items: center;
             background-color: #252525;
@@ -260,8 +258,6 @@
             font-size: 16px;
             color: #cccccc;
         }
-
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -440,13 +436,28 @@
             color: #aaaaaa;
         }
 
+        .modal:target .modal-content {
+            animation: easeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes easeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         /* Responsive Design */
         @media (min-width: 768px) {
             .content-header h1 {
                 font-size: 48px;
             }
 
-            .add-journal-btn {
+            .add-journal-butn {
                 padding: 12px 25px;
                 font-size: 18px;
             }
@@ -528,7 +539,7 @@
                 font-size: 36px;
             }
 
-            .add-journal-btn {
+            .add-journal-butn {
                 align-self: flex-end;
                 padding: 8px 15px;
                 font-size: 14px;
@@ -546,6 +557,24 @@
 
             .journal-date {
                 font-size: 14px;
+            }
+
+            footer {
+                padding: 15px;
+                margin-top: 30px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+            }
+
+            .footer-text {
+                font-size: 10px;
             }
 
             .modal-content {
@@ -579,24 +608,6 @@
                 padding: 8px 15px;
                 font-size: 14px;
             }
-
-            footer {
-                padding: 15px;
-                margin-top: 30px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .footer-links a {
-                font-size: 12px;
-            }
-
-            .footer-text {
-                font-size: 10px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -625,7 +636,7 @@
                 font-size: 28px;
             }
 
-            .add-journal-btn {
+            .add-journal-butn {
                 padding: 6px 12px;
                 font-size: 12px;
             }
@@ -642,6 +653,19 @@
 
             .journal-date {
                 font-size: 13px;
+            }
+
+            footer {
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .footer-text {
+                font-size: 9px;
             }
 
             .modal-content {
@@ -674,104 +698,57 @@
                 padding: 6px 12px;
                 font-size: 12px;
             }
-
-            footer {
-                padding: 10px;
-                margin-top: 20px;
-            }
-
-            .footer-links a {
-                font-size: 11px;
-            }
-
-            .footer-text {
-                font-size: 9px;
-            }
         }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">[Your Name]</div>
-        <div class="nav-links">
-            <a href="#">About</a>
-            <a href="#">Projects</a>
-            <a href="#">Blog</a>
-        </div>
-        <div class="nav-buttons">
-            <a href="#" class="dashboard">Dashboard</a>
-            <a href="#" class="get-started">Contact Me</a>
-        </div>
-    </nav>
-
+{% endblock custom_style %}
+{% block body %}
     <main>
         <div class="main-content">
             <div class="content-header">
                 <h1>MY JOURNAL TRACKER</h1>
-                <a href="#add-journal-modal" class="add-journal-btn">Add Today's Journal</a>
+                <a href="#add-journal-modal" class="add-journal-butn">Add Today's Journal</a>
             </div>
-
-            <div class="journal-list">
-                <a href="#" class="journal-entry">
-                    <div class="journal-icon"></div>
-                    <div class="journal-date">June 13, 2025</div>
-                </a>
-                <a href="#" class="journal-entry">
-                    <div class="journal-icon"></div>
-                    <div class="journal-date">June 12, 2025</div>
-                </a>
-                <a href="#" class="journal-entry">
-                    <div class="journal-icon"></div>
-                    <div class="journal-date">June 11, 2025</div>
-                </a>
-                <a href="#" class="journal-entry">
-                    <div class="journal-icon"></div>
-                    <div class="journal-date">June 10, 2025</div>
-                </a>
-            </div>
-
-            <!-- Modal -->
+            <form method="post" action="{% url "add_journal" %}">
+            {% csrf_token %}
             <div id="add-journal-modal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div>
                             <div class="modal-title">Add Journal Entry</div>
-                            <div class="modal-date">June 14, 2025</div>
+                            <div class="modal-date">{{today}} </div>
                         </div>
-                        <a href="#" class="modal-close">Close</a>
+                        <a href="" class="modal-close">Close</a>
                     </div>
                     <div class="modal-body">
                         <div class="modal-field">
                             <label for="learnt-today">What I Learnt Today</label>
-                            <textarea id="learnt-today" placeholder="Enter what you learnt today..."></textarea>
+                            <textarea name="learnt" id="learnt-today" placeholder="Enter what you learnt today..."></textarea>
                         </div>
                         <div class="modal-field">
                             <label for="built-today">What I Built Today</label>
-                            <textarea id="built-today" placeholder="Enter what you built today..."></textarea>
+                            <textarea name="built" id="built-today" placeholder="Enter what you built today..."></textarea>
                         </div>
                         <div class="modal-field">
                             <label for="thoughts-feelings">Thoughts and Feelings</label>
-                            <textarea id="thoughts-feelings" placeholder="Enter your thoughts and feelings..."></textarea>
+                            <textarea name="thoughts" id="thoughts-feelings" placeholder="Enter your thoughts and feelings..."></textarea>
                         </div>
                         <div class="modal-field">
                             <label for="tomorrows-mission">Tomorrow's Mission</label>
-                            <textarea id="tomorrows-mission" placeholder="Enter your mission for tomorrow..."></textarea>
+                            <textarea name="tomorrow" id="tomorrows-mission" placeholder="Enter your mission for tomorrow..."></textarea>
                         </div>
-                        <a href="#" class="modal-submit">Submit</a>
+                        <button type="submit" class="modal-submit">Submit</button>
                     </div>
                 </div>
             </div>
+            </form>
+            <div class="journal-list">
+                {% for journal in journals %}
+                <a href="{% url "view_journal" journal.id %}" class="journal-entry">
+                    <div class="journal-icon"></div>
+                    <div class="journal-date">{{journal.date}}</div>
+                </a>
+                <a style="text-decoration: none; color: inherit;" class="add-journal-butn" href="{% url "delete_journal" journal.id %}">Delete</a>
+                {% endfor %}
+            </div>
         </div>
     </main>
-
-    <footer>
-        <div class="footer-links">
-            <a href="#">About Me</a>
-            <a href="#">Projects</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="footer-text">© 2025 [Your Name]. All rights reserved.</div>
-    </footer>
-</body>
-</html>
+{% endblock body %}

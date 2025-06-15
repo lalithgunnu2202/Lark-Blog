@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal | {% block title %}{% endblock title %}</title>
+    <style>
+            .logo {
+            font-family: 'Unnbounded', sans-serif;
+            font-size: 2.0rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+
+            /* Gradient text with animation */
+            background: linear-gradient(270deg, #00C9FF,rgb(236, 39, 254), #00C9FF);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: gradientShift 10s ease infinite;
+
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        @keyframes gradientShift {
+            0% {
+            background-position: 0% 50%;
+            }
+            50% {
+            background-position: 100% 50%;
+            }
+            100% {
+            background-position: 0% 50%;
+            }
+        }
+
+        .logo::before {
+                content: '';
+                margin-right: 5px;
+                color: #ffffff;
+                animation: glow 2s infinite alternate;
+            }
+        
+        @keyframes glow {
+            0% {
+            text-shadow: 0 0 5px #007bff;
+            }
+            100% {
+            text-shadow: 0 0 20px #007bff, 0 0 30px #007bff;
+            }
+        }
+
+        .error-alert {
+            background-color: #ff3333; /* Red background for error */
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 10px; /* Curved edges */
+            border: 1px solid rgba(255, 51, 51, 0.5); /* Subtle red border */
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 767px) {
+            .error-alert {
+                padding: 8px 12px;
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-alert {
+                padding: 6px 10px;
+                font-size: 11px;
+                margin-bottom: 10px;
+            }
+        }
+        {% block custom_style %}{% endblock custom_style %}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">LARK</div>
+        <div class="nav-links">
+            <a href="#">About</a>
+            <a href="#">Projects</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="nav-buttons">
+            <a href="#" class="dashboard">Dashboard</a>
+            <a href="#" class="get-started">Contact Me</a>
+        </div>
+    </nav>
+    {% block body %}{% endblock body %}
+    {% for message in messages %}
+    <div class="error-alert">{{message}}.</div>
+    {% endfor %}
+    <footer>
+        <div class="footer-links">
+            <a href="#">About Me</a>
+            <a href="#">Projects</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="footer-text">© 2025 [Your Name]. All rights reserved.</div>
+    </footer>
+</body>
+</html>

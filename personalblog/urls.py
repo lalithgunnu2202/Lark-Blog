@@ -22,4 +22,5 @@ urlpatterns = [
     path('',include('blog.urls')),
     path('blog_details/',include('blog_detail.urls')),
     path('lark/',include('staticpages.urls')),
+    path('personal/',include('personal.urls')),
 ]

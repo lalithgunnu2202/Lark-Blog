@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'blog_detail',
     'staticpages',
+    'personal',
 ]
 
 MIDDLEWARE = [
