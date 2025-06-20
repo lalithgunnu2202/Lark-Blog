@@ -1,0 +1,246 @@
+{% extends "staticpages/base.html" %}
+{% block title %}Portfolio{% endblock title %}
+{% block custom_style %}
+        .portfolio-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .portfolio-header h1 {
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-projects {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: #252525;
+            border-radius: 20px; /* Curved edges */
+            padding: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .project-card h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 16px;
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #007bff;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-details-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        @media (min-width: 768px) {
+            .portfolio-header h1 {
+                font-size: 48px;
+            }
+
+            .project-card {
+                padding: 25px;
+            }
+
+            .project-card h2 {
+                font-size: 22px;
+            }
+
+            .project-card p {
+                font-size: 18px;
+            }
+
+            .view-details-btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            main {
+                padding: 15px;
+                padding-top: 70px;
+            }
+
+            .navbar {
+                padding: 8px 15px;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links on mobile */
+            }
+
+            .nav-buttons a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .portfolio-header h1 {
+                font-size: 36px;
+            }
+
+            .project-card {
+                padding: 15px;
+            }
+
+            .project-card h2 {
+                font-size: 18px;
+            }
+
+            .project-card p {
+                font-size: 14px;
+            }
+
+            .view-details-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            footer {
+                padding: 15px;
+                margin-top: 30px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+            }
+
+            .footer-text {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 10px;
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 6px 10px;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+            }
+
+            .logo {
+                font-size: 14px;
+            }
+
+            .nav-buttons a {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            .portfolio-header h1 {
+                font-size: 28px;
+            }
+
+            .project-card {
+                padding: 12px;
+            }
+
+            .project-card h2 {
+                font-size: 16px;
+            }
+
+            .project-card p {
+                font-size: 13px;
+            }
+
+            .view-details-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            footer {
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .footer-text {
+                font-size: 9px;
+            }
+        }
+
+{% endblock custom_style %}
+{% block body %}
+<main>
+        <div class="portfolio-content">
+            <div class="portfolio-header">
+                <h1>MY PORTFOLIO</h1>
+            </div>
+
+            <div class="portfolio-projects">
+                {% for project in projects %}
+                <div class="project-card">
+                    <h2>{{project.name}}</h2>
+                    <p>Click on View project details to know more</p>
+                    <a href="{% url "project_details_view" project.id %}" class="view-details-btn">View Full Details</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+</main>
+{% endblock body %}

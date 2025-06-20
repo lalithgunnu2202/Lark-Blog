@@ -8,6 +8,41 @@
     </title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+      *{
+          font-family: unbounded, sans-serif;
+          font-weight: 100;
+      }
+      body {
+          background: linear-gradient(45deg, #1a1a1a, #2c2c2c); /* Dark gradient background */
+          color: #ffffff;
+          position: relative;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          background-attachment: fixed; /* Ensures background stays in place */
+          background-size: cover; /* Covers the entire viewport */
+      }
+      body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle, rgba(0, 123, 255, 0.1) 0%, transparent 70%);
+          opacity: 0.5;
+          animation: pulse 15s infinite ease-in-out;
+          z-index: -1;
+          background-color: #1a1a1a; /* Fallback color */
+      }
+
+      main {
+          background-color: transparent; /* Ensures main doesn't inherit a white default */
+          flex: 1;
+          padding: 20px;
+          padding-top: 80px;
+      }
+
       .navbar {
         display: flex;
         justify-content: space-between;
@@ -227,7 +262,7 @@
         <a style="text-decoration: none;" href="{% url "home" %}"><div class="logo">LARK</div></a>
         <div class="nav-links">
             <a href="{% url "all_blogs" %}">All Blogs</a>
-            <a href="#">My Portfolio</a>
+            <a href="{% url "portfolio_view" %}">My Portfolio</a>
             <a href="#">About Me</a>
         </div>
         <div class="nav-buttons">

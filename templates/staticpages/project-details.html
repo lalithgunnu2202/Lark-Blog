@@ -1,0 +1,359 @@
+{% extends "staticpages/base.html" %}
+{% block title %}Project Details{% endblock title %}
+{% block custom_style %}
+        .project-details-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .project-header h1 {
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+
+        .project-timestamp {
+            font-size: 16px;
+            color: #cccccc;
+        }
+
+        .project-overview {
+            background-color: #252525;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-overview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .project-overview h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-overview p {
+            font-size: 16px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .project-technologies {
+            background-color: #252525;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-technologies:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .project-technologies h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-technologies ul {
+            list-style: none;
+            font-size: 16px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .project-technologies ul li::before {
+            content: '•';
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        .project-video {
+            background-color: #252525;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .project-video:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .project-video h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-video iframe {
+            width: 100%;
+            max-width: 560px; /* Standard YouTube embed width */
+            height: 315px; /* Standard YouTube embed height */
+            border: none;
+            border-radius: 10px;
+            background-color: #333333;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .project-header h1 {
+                font-size: 48px;
+            }
+
+            .project-timestamp {
+                font-size: 18px;
+            }
+
+            .project-overview, .project-technologies, .project-video {
+                padding: 25px;
+            }
+
+            .project-overview h2, .project-technologies h2, .project-video h2 {
+                font-size: 22px;
+            }
+
+            .project-overview p, .project-technologies ul {
+                font-size: 18px;
+            }
+
+            .project-video iframe {
+                max-width: 640px;
+                height: 360px;
+            }
+
+            .back-btn {
+                padding: 12px 25px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            main {
+                padding: 15px;
+                padding-top: 70px;
+            }
+
+            .navbar {
+                padding: 8px 15px;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links on mobile */
+            }
+
+            .nav-buttons a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+                margin-bottom: 20px;
+            }
+
+            .project-header h1 {
+                font-size: 36px;
+            }
+
+            .project-timestamp {
+                font-size: 14px;
+            }
+
+            .project-overview, .project-technologies, .project-video {
+                padding: 15px;
+            }
+
+            .project-overview h2, .project-technologies h2, .project-video h2 {
+                font-size: 18px;
+            }
+
+            .project-overview p, .project-technologies ul {
+                font-size: 14px;
+            }
+
+            .project-video iframe {
+                max-width: 100%;
+                height: 200px;
+            }
+
+            .back-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            footer {
+                padding: 15px;
+                margin-top: 30px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+            }
+
+            .footer-text {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 10px;
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 6px 10px;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+            }
+
+            .logo {
+                font-size: 14px;
+            }
+
+            .nav-buttons a {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            .project-header h1 {
+                font-size: 28px;
+            }
+
+            .project-timestamp {
+                font-size: 13px;
+            }
+
+            .project-overview, .project-technologies, .project-video {
+                padding: 12px;
+            }
+
+            .project-overview h2, .project-technologies h2, .project-video h2 {
+                font-size: 16px;
+            }
+
+            .project-overview p, .project-technologies ul {
+                font-size: 13px;
+            }
+
+            .project-video iframe {
+                max-width: 100%;
+                height: 180px;
+            }
+
+            .back-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            footer {
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .footer-text {
+                font-size: 9px;
+            }
+        }
+{% endblock custom_style %}
+{% block body %}
+<main>
+        <div class="project-details-content">
+            <div class="project-header">
+                <h1>{{project.name}}</h1>
+                <div class="project-timestamp">Last Updated: Friday, June 20, 2025, 06:34 PM IST</div>
+            </div>
+
+            <div class="project-overview">
+                <h2>Overview</h2>
+                <p>{{project.disc}}</p>
+            </div>
+
+            <div class="project-technologies">
+                <h2>Technologies Used</h2>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>Backend Integration (Django)</li>
+                </ul>
+            </div>
+
+            <div class="project-video">
+                <h2>Project Video</h2>
+                <iframe src="{{project.video_url}}" allowfullscreen></iframe>
+            </div>
+
+            <a href="{% url "portfolio_view" %}" class="back-btn">Back to Portfolio</a>
+        </div>
+</main>
+{% endblock body %}

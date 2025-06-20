@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'blog_detail',
     'staticpages',
     'personal',
+    'portfolio',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,10 @@ DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
+    # 'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
 }
 
 

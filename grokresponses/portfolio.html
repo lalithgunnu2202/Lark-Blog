@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Lark</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .project-card {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .project-card h3 {
+            margin: 0 0 10px;
+        }
+        .project-card p {
+            margin: 0 0 15px;
+            color: #ccc;
+        }
+        .view-details {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .view-details:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2a2a2a;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Portfolio</h1>
+    </div>
+    <div class="container">
+        <div class="projects">
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>A web application built with HTML, CSS, and JavaScript.</p>
+                <button class="view-details">View Full Details</button>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>A mobile app prototype using modern frameworks.</p>
+                <button class="view-details">View Full Details</button>
+            </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>An AI-powered tool for data analysis.</p>
+                <button class="view-details">View Full Details</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Lark. All rights reserved.</p>
+    </div>
+</body>
+</html>
